@@ -1,7 +1,10 @@
-import { UserButton } from '@clerk/nextjs'
-import React from 'react'
 
-const Page = () => {
+import { UserButton } from '@clerk/nextjs'
+import { getUser } from "@/actions/auth-action"
+
+const Page = async () => {
+  const data = await getUser()
+  console.log(data);
   return (
     <div>
       <UserButton />

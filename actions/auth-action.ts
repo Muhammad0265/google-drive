@@ -17,3 +17,8 @@ export const createUser = async ({
 	})
 	return JSON.parse(JSON.stringify(data))
 }
+
+export const getUser = async () => {
+	const data = await axiosClient.get('/api/users')
+	return data.data['hydra:member']
+}
