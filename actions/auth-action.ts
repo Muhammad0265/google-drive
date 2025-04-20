@@ -9,7 +9,7 @@ export const createUser = async ({
 	fullName,
 	picture,
 }: UserCreate) => {
-	const data = await axiosClient.post('/api/users', {
+	const data = await axiosClient.post('/api/user/media', {
 		clerkId,
 		email,
 		fullName,
