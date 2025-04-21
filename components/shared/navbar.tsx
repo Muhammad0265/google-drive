@@ -1,4 +1,3 @@
-'use client'
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -6,11 +5,13 @@ import { ModeToggle } from "./mode-toggle";
 import { HelpCircle, Settings } from "lucide-react";
 import { Avatar, AvatarFallback } from "../ui/avatar";
 import UserBox from "./user-box";
-import { useAuth } from "@clerk/nextjs";
+import { getUser } from "@/actions/auth-action";
+import { auth } from "@clerk/nextjs/server";
 
-const Navbar = () => {
-    const { userId } = useAuth();
-
+const Navbar = async () => {
+    const { userId } = await auth();
+    const user = await getUser()
+    console.log(user);
 
     return (
         <div className="h-[10vh] fixed left-0 top-0 right-0 z-30 bg-[#F6F9FC] dark:bg-[#1F1F1F] border-b">
