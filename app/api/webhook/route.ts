@@ -51,10 +51,10 @@ export async function POST(req: Request) {
 
 		try {
 			const user = await createUser({
-				clerkId: image_url,
+				clerkId: id,
 				email: email_addresses[0].email_address,
 				fullName: `${first_name} ${last_name}`,
-				picture: id,
+				picture: image_url,
 			})
 
 			return NextResponse.json({ message: 'User created', user })
