@@ -9,13 +9,17 @@ export const createUser = async ({
 	fullName,
 	picture,
 }: UserCreate) => {
-	const data = await axiosClient.post('/api/user/media', {
-		clerkId,
-		email,
-		fullName,
-		picture,
-	})
-	return JSON.parse(JSON.stringify(data))
+	try {
+		const { data } = await axiosClient.post('/api/user/media', {
+			email,
+			fullName,
+			clerkId,
+			picture,
+		})
+		return data
+	} catch (err) {
+		throw new Error(`Error creating user ${err}`)
+	}
 }
 
 export const getUser = async () => {

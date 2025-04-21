@@ -4,7 +4,7 @@ import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ChildProps } from "@/types";
 import { ThemeProvider } from "@/components/providers/theme-provider";
-
+import { Toaster } from 'sonner';
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -34,6 +34,7 @@ export default function RootLayout({ children }: ChildProps) {
             disableTransitionOnChange
             storageKey="google-drive"
           >
+            <Toaster position="top-center" />
             {children}
           </ThemeProvider>
         </body>
