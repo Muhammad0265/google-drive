@@ -4,7 +4,7 @@ import { axiosClient } from '@/http/axios'
 import { UserCreate } from './type'
 
 export async function createUser(data: UserCreate) {
-	const res = await fetch('http://127.0.0.1:8500/api/user/media', {
+	const res = await fetch('https://drive.mavmu.uz/api/user/media', {
 		method: 'POST',
 		body: JSON.stringify(data),
 		headers: { 'Content-Type': 'application/ld+json' },
