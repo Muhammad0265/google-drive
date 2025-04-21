@@ -2,7 +2,6 @@ import { createUser } from '@/actions/auth-action'
 import { WebhookEvent } from '@clerk/nextjs/server'
 import { headers } from 'next/headers'
 import { NextResponse } from 'next/server'
-import { toast } from 'sonner'
 import { Webhook } from 'svix'
 
 export async function POST(req: Request) {
@@ -50,19 +49,19 @@ export async function POST(req: Request) {
 	if (eventType === 'user.created') {
 		const { id, email_addresses, image_url, first_name, last_name } = evt.data
 
-		const promise = createUser({
-			clerkId: id,
-			email: email_addresses[0].email_address,
-			fullName: `${first_name} ${last_name}`,
-			picture: image_url,
-		})
-		toast.promise(promise, {
-			loading: 'Loading...',
-			success: 'Folder created',
-			error: 'Error creating folder',
-		})
+		try {
+			const user = await createUser({
+				clerkId: id,
+				email: email_addresses[0].email_address,
+				fullName: `${first_name} ${last_name}`,
+				picture: image_url,
+			})
 
-		return NextResponse.json({ message: 'OK', promise })
+			return NextResponse.json({ message: 'User created', user })
+		} catch (error) {
+			console.error('Error creating user:', error)
+			return new Response(`Failed to create user ${error}`, { status: 500 })
+		}
 	}
 
 	// if (eventType === 'user.updated') {
